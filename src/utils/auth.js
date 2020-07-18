@@ -16,7 +16,16 @@ export const verifyToken = token =>
     })
   })
 
-export const signup = async (req, res) => {}
+export const signup = async (req, res) => {
+    try {
+        const user = await User.create(req.body)
+        const token = newToken(user)
+        res.send({ token })
+    } catch (e) {
+        console.log(e)
+        res.status(400).end()
+    }
+}
 
 export const signin = async (req, res) => {}
 
